@@ -20,6 +20,8 @@ import Game_MM_CLIP.clip as mm_clip
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+print(device)
+
 def accuracy(output, target, topk=(1,)):
     pred = output.topk(max(topk), 1, True, True)[1].t()
     # print("pred:", pred.shape) # [5, 10] 
@@ -116,8 +118,8 @@ def generate_hm(hm_type, img, gt, pred, resize):
     return emap
 
 if __name__ == '__main__':
-    data_path = "./data/imagenet/val/"
-    # ins_path = './data/imagenet/ins_samples/'  ### for debug, saving insertion samples
+    data_path = "/home/infres/pmbathe-24/Projet-IA-Fairness/Grad-Eclip-main/data/val/"
+    ins_path = '/home/infres/pmbathe-24/Projet-IA-Fairness/Grad-Eclip-main/data/ins_samples/'  ### for debug, saving insertion samples
 
     # hm_types = ['eclip-wo-ksim_gt', 'eclip-wo-ksim_pred', 'eclip_gt', 'eclip_pred', 'game_gt', 'game_pred',
     #         'gradcam_gt', 'gradcam_pred', 'maskclip_gt', 'maskclip_pred', 'selfattn', 'surgery_gt', 'surgery_pred', 'm2ib_gt', 'm2ib_pred']
@@ -145,7 +147,7 @@ if __name__ == '__main__':
     cal_gap = 10
     with open("imagenet_class_index.json", "r") as ff:
         class_dict = json.load(ff)
-        for label, values in list(class_dict.items()):
+        for label, values in list(class_dict.items())[0:3]:  # only process the first 100 classes
             label = int(label)
             folder = values[0]
             # files = os.listdir(data_path+folder)
