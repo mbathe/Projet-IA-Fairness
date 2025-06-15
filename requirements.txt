@@ -41,6 +41,7 @@ imageio==2.37.0
 imagenetv2_pytorch @ git+https://github.com/modestyachts/ImageNetV2_pytorch@14d4456c39fe7f02a665544dd9fc37c1a5f8b635
 ipykernel==6.29.5
 ipython==9.3.0
+captum
 ipython_pygments_lexers==1.1.1
 ipywidgets==8.1.7
 isoduration==20.11.0
