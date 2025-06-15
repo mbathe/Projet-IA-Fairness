@@ -48,6 +48,9 @@ def build_zero_shot_classifier(
         device: Device to use.
         use_tqdm: Enable TQDM progress bar.
     """
+    
+    
+    model = model.to(device)
     assert isinstance(templates, Sequence) and len(templates) > 0
     assert isinstance(classnames, Sequence) and len(classnames) > 0
     use_format = isinstance(templates[0], str)

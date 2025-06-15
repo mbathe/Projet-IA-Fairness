@@ -4,3 +4,7 @@ torch
 torchvision
 numpy
 scipy
+opencv-python
+install matplotlib
+scikit-image
+transformers
