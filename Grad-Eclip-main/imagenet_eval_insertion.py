@@ -147,7 +147,7 @@ if __name__ == '__main__':
     cal_gap = 10
     with open("imagenet_class_index.json", "r") as ff:
         class_dict = json.load(ff)
-        for label, values in list(class_dict.items())[0:3]:  # only process the first 100 classes
+        for label, values in list(class_dict.items())[0:2]:  # only process the first 100 classes
             label = int(label)
             folder = values[0]
             # files = os.listdir(data_path+folder)
