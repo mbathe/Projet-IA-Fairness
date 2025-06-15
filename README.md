@@ -1,5 +1,17 @@
 # Grad-ECLIP: Explainable CLIP via Gradient-based Attention Analysis
 
+
+
+
+Membres de l'équipe:
+
+- Membre 1: **Mbathe Mekontchou Paul**
+- Membre 2: **Wande Wula Alfred**
+- Membre 3: **Vu Julien**
+- Membre 4: **Ouhiba Aymen**
+- Membre 5: **Garra Nohalia**
+
+
 Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'article scientifique 2502.18816v1.pdf, qui propose une approche novatrice pour expliquer les décisions du modèle CLIP (Contrastive Language-Image Pre-Training) en utilisant les gradients des couches d'attention.
 
 **🔗 Repository officiel :** Nous nous sommes inspirés du repository officiel de Grad-ECLIP : https://github.com/Cyang-Zhao/Grad-Eclip
