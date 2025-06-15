@@ -8,3 +8,4 @@ opencv-python
 install matplotlib
 scikit-image
 transformers
+captum
