@@ -1,0 +1,6 @@
+Method,GT_Top1,GT_Top5,Pred_Top1,Pred_Top5
+ECLIP,0.98,1.0,0.98,1.0
+Grad-CAM,0.98,1.0,0.98,1.0
+MaskCLIP,0.98,1.0,0.98,1.0
+Rollout,0.98,1.0,0.98,1.0
+CLIPSurgery,0.98,1.0,0.98,1.0
