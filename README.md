@@ -3,7 +3,7 @@
 
 
 
-Membres de l'équipe:
+Auteur du projet :
 
 - Membre 1: **Mbathe Mekontchou Paul**
 - Membre 2: **Wande Wula Alfred**
