@@ -172,4 +172,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-Grad-Eclip-main/data
+Grad_CLIP/data
+test
+outfile

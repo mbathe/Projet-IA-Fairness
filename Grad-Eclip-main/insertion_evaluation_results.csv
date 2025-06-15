@@ -1,8 +1,0 @@
-Method,GT_Top1,GT_Top5,Pred_Top1,Pred_Top5
-Rollout,0.0,0.25,0.0,0.25
-Grad-ECLIP,0.0,0.25,0.0,0.25
-GAME,0.0,0.25,0.0,0.25
-MaskCLIP,0.0,0.25,0.0,0.25
-Grad-CAM,0.0,0.25,0.0,0.25
-CLIPSurgery,0.0,0.25,0.0,0.25
-M2IB,0.0,0.25,0.0,0.25
