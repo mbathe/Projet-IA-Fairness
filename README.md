@@ -164,7 +164,7 @@ cd ..
 python -c "import torch; import clip; print('Installation réussie!')"
 ```
 
-## 🗂 Téléchargement des données
+##  Téléchargement des données
 
 ### Dataset principal : ImageNet
 
@@ -177,7 +177,7 @@ jupyter notebook download_dataset.ipynb
 
 ### Options de téléchargement disponibles
 
-#### 1. 🎯 **Kaggle** (Recommandé)
+#### 1.  **Kaggle** (Recommandé)
 ```python
 # Configuration requise
 kaggle_username = "votre_username"
@@ -187,19 +187,19 @@ kaggle_key = "votre_api_key"
 # Le notebook gère automatiquement l'extraction et l'organisation
 ```
 
-#### 2. 🌐 **Site officiel ImageNet**
+#### 2.  **Site officiel ImageNet**
 ```python
 # Nécessite inscription sur image-net.org
 # Téléchargement manuel puis traitement automatique
 ```
 
-#### 3. 🔗 **Academic Torrents**
+#### 3.  **Academic Torrents**
 ```python
 # Plus fiable pour de gros volumes
 # Téléchargement via protocole torrent
 ```
 
-#### 4. 📝 **Échantillon de test**
+#### 4.  **Échantillon de test**
 ```python
 # Dataset réduit pour développement et tests rapides
 # ~100 images par classe sur 10 classes
@@ -234,7 +234,7 @@ Le projet supporte également :
 ## 📓 Notebooks principaux
 
 ### 1. `grad_eclip_image.ipynb` 
-**🖼️ Explication des images par le texte**
+** Explication des images par le texte**
 
 Ce notebook implémente l'algorithme principal de Grad-ECLIP pour expliquer pourquoi une image correspond à un texte donné.
 
@@ -311,29 +311,9 @@ Ce notebook compare Grad-ECLIP avec les autres méthodes d'explicabilité dispon
 - **GAME-MM** : Gradient-weighted Class Activation Mapping
 - **M2IB** : Multi-Modal Information Bottleneck
 
-**Comparaisons effectuées :**
-```python
-# Exemple de comparaison
-methods = ['grad_eclip', 'blip', 'clip_surgery', 'game_mm', 'm2ib']
-image = "concept_example.jpg"
-text = "a red car parked on the street"
 
-# Générer toutes les explications
-results = compare_all_methods(methods, image, text)
 
-# Visualisation comparative
-plot_comparison_grid(results)  # Grille 2x3 avec toutes les méthodes
-plot_quantitative_comparison(results)  # Métriques numériques
-```
-
-**Métriques d'évaluation :**
-- **Fidélité** : Cohérence avec les prédictions du modèle original
-- **Localisation** : Précision de la localisation des objets importants
-- **Stabilité** : Robustesse aux petites perturbations
-- **Temps de calcul** : Efficacité computationnelle
-- **Qualité visuelle** : Évaluation subjective des explications
-
-## 🎯 Méthodes d'explication comparées
+##  Méthodes d'explication comparées
 
 ### Grad-ECLIP (Notre méthode) 🏆
 **Localisation :** generate_emap.py
@@ -370,7 +350,7 @@ plot_quantitative_comparison(results)  # Métriques numériques
   - `med.py` : Encodeur multimodal
   - `vit.py` : Implementation ViT
 
-### CLIP Surgery 🔴
+### CLIP Surgery 
 **Localisation :** CLIP_Surgery
 
 - **Principe** : Modification architecturale de CLIP pour améliorer la localisation
@@ -379,7 +359,7 @@ plot_quantitative_comparison(results)  # Métriques numériques
   - `clip_utils.py` : Utilitaires modifiés
   - `pytorch_clip_guided_diffusion/` : Integration avec diffusion
 
-### GAME-MM 🟡
+### GAME-MM 
 **Localisation :** Game_MM_CLIP
 
 - **Principe** : Gradient-weighted Class Activation Mapping pour le multimodal
@@ -388,7 +368,7 @@ plot_quantitative_comparison(results)  # Métriques numériques
   - `models/` : Architectures de modèles
   - `utils/` : Fonctions utilitaires
 
-### M2IB 🟢
+### M2IB 
 **Localisation :** M2IB
 
 - **Principe** : Multi-Modal Information Bottleneck
@@ -397,7 +377,7 @@ plot_quantitative_comparison(results)  # Métriques numériques
   - `model.py` : Architecture M2IB
   - `utils.py` : Fonctions de support
 
-## 🎯 Évaluation sur ImageNet
+##  Évaluation sur ImageNet
 
 ### Classes et templates ImageNet
 
@@ -431,319 +411,28 @@ classes = [
 ### Tests de performance quantitative
 
 #### 1. `imagenet_eval_deletion.ipynb`
-**🗑️ Test de suppression (Deletion Test)**
+** Test de suppression (Deletion Test)**
 
 Ce test mesure la **baisse de performance** quand on supprime progressivement les régions les plus importantes identifiées par chaque méthode.
 
-**Protocole :**
-```python
-# Processus d'évaluation par suppression
-def deletion_test(model, image, text, explanation_method):
-    original_score = model(image, text).confidence
-    
-    # Trier les pixels par importance (décroissant)
-    importance_map = explanation_method(model, image, text)
-    sorted_pixels = sort_pixels_by_importance(importance_map)
-    
-    scores = []
-    for deletion_ratio in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
-        # Supprimer les pixels les plus importants
-        masked_image = delete_pixels(image, sorted_pixels[:deletion_ratio])
-        new_score = model(masked_image, text).confidence
-        scores.append(new_score)
-    
-    return scores  # Plus la baisse est rapide, meilleure est l'explication
-```
 
-**Métriques calculées :**
-- **AUC (Area Under Curve)** : Surface sous la courbe de suppression
-- **Fidélité** : Cohérence avec les prédictions originales
-- **Pente de dégradation** : Vitesse de baisse de performance
-
-**Résultats attendus :**
-```
-Start: Processing the 0th folder, target class name: tench
-Start: Processing the 1th folder, target class name: goldfish  
-Start: Processing the 2th folder, target class name: great white shark
-...
-Processing complete: 1000 classes evaluated
-```
 
 #### 2. `imagenet_eval_insertion.ipynb`
 **➕ Test d'insertion (Insertion Test)**
 
 Ce test mesure l'**amélioration de performance** quand on révèle progressivement les régions importantes sur une image initialement masquée.
 
-**Protocole :**
-```python
-# Processus d'évaluation par insertion
-def insertion_test(model, image, text, explanation_method):
-    # Commencer avec une image complètement masquée
-    masked_image = np.zeros_like(image)
-    baseline_score = model(masked_image, text).confidence
-    
-    # Trier les pixels par importance (décroissant)
-    importance_map = explanation_method(model, image, text)
-    sorted_pixels = sort_pixels_by_importance(importance_map)
-    
-    scores = [baseline_score]
-    for insertion_ratio in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
-        # Révéler les pixels les plus importants
-        revealed_image = reveal_pixels(image, sorted_pixels[:insertion_ratio])
-        new_score = model(revealed_image, text).confidence
-        scores.append(new_score)
-    
-    return scores  # Plus la montée est rapide, meilleure est l'explication
-```
 
-**Analyses effectuées :**
-- **Courbes d'insertion** : Performance vs pourcentage de pixels révélés
-- **Efficacité** : Pourcentage minimum de pixels pour atteindre 90% de la performance
-- **Comparaison inter-méthodes** : Classement des méthodes par efficacité
 
-### Résultats de l'évaluation
 
-Les résultats sont sauvegardés dans `insertion_evaluation_results.csv` avec les colonnes :
 
-```csv
-method,class_name,class_id,auc_deletion,auc_insertion,efficiency_90,time_ms
-grad_eclip,tench,n01440764,0.85,0.78,0.45,15.2
-blip,tench,n01440764,0.82,0.75,0.52,28.1
-clip_surgery,tench,n01440764,0.81,0.74,0.48,22.3
-...
-```
-
-## 🚀 Utilisation
-
-### Démarrage rapide
-
-#### 1. **Expliquer une image** :
-```bash
-cd Grad_CLIP
-jupyter notebook grad_eclip_image.ipynb
-
-# Ou en ligne de commande
-python generate_emap.py --image whippet.png --text "a photo of a whippet dog"
-```
-
-#### 2. **Comparer les méthodes** :
-```bash
-jupyter notebook compare_visualize.ipynb
-
-# Génère automatiquement les comparaisons visuelles
-# Sauvegarde dans outfile/comparisons/
-```
-
-#### 3. **Évaluer sur ImageNet** :
-```bash
-# Test de suppression (peut prendre plusieurs heures)
-jupyter notebook imagenet_eval_deletion.ipynb
-
-# Test d'insertion
-jupyter notebook imagenet_eval_insertion.ipynb
-```
-
-### Utilisation programmatique
-
-#### API simple
-```python
-from Grad_CLIP.generate_emap import grad_eclip, load_clip_model
-from Grad_CLIP.clip_utils import load_image
-import torch
-
-# 1. Charger le modèle CLIP
-model, preprocess = load_clip_model()
-
-# 2. Charger et préprocesser l'image
-image_path = "whippet.png"
-image = load_image(image_path)
-image_tensor = preprocess(image).unsqueeze(0)
-
-# 3. Définir le texte
-text = "a photo of a whippet dog"
-
-# 4. Générer l'explication
-with torch.no_grad():
-    explanation = grad_eclip(model, image_tensor, text)
-
-# 5. Visualiser
-from Grad_CLIP.clip_utils import visualize_explanation
-visualize_explanation(image, explanation, save_path="result.png")
-```
-
-#### API avancée
-```python
-from Grad_CLIP.generate_emap import GradECLIPExplainer
-
-# Initialiser l'explainer
-explainer = GradECLIPExplainer(
-    model_name='ViT-B/32',
-    device='cuda' if torch.cuda.is_available() else 'cpu'
-)
-
-# Configuration avancée
-config = {
-    'alpha': 0.4,           # Transparence de l'overlay
-    'colormap': 'jet',      # Palette de couleurs
-    'blur_sigma': 1.0,      # Flou gaussien
-    'threshold': 0.3        # Seuil de saillance
-}
-
-# Générer l'explication avec configuration
-explanation = explainer.explain(
-    image_path="concept_decomposition.png",
-    text="a red sports car",
-    config=config
-)
-
-# Sauvegarder avec métadonnées
-explainer.save_results(
-    explanation, 
-    "detailed_explanation.png",
-    include_metadata=True
-)
-```
-
-### Scripts de génération
-
-#### `generate_emap.py` - Script principal
-```python
-# Fonctions principales disponibles :
-
-def grad_eclip(model, image, text, layer_idx=-1):
-    """
-    Algorithme principal Grad-ECLIP
-    
-    Args:
-        model: Modèle CLIP
-        image: Tensor d'image préprocessée
-        text: String de description
-        layer_idx: Couche d'attention à utiliser (-1 = dernière)
-    
-    Returns:
-        explanation_map: Carte d'explication 2D
-    """
-
-def grad_cam_baseline(model, image, text):
-    """Baseline Grad-CAM pour comparaison"""
-
-def clip_encode_dense(model, image):
-    """Encodage CLIP avec préservation de la résolution spatiale"""
-
-def visualize_results(image, explanation, method_name):
-    """Visualisation standardisée des résultats"""
-```
-
-#### Utilisation en ligne de commande
-```bash
-# Explication simple
-python generate_emap.py \
-    --image whippet.png \
-    --text "a photo of a whippet dog" \
-    --output result.png
-
-# Comparaison de méthodes
-python generate_emap.py \
-    --image whippet.png \
-    --text "a photo of a whippet dog" \
-    --compare-methods grad_eclip,blip,clip_surgery \
-    --output-dir comparisons/
-
-# Évaluation sur dataset
-python generate_emap.py \
-    --dataset imagenet \
-    --eval-mode deletion \
-    --num-samples 1000 \
-    --output-csv results.csv
-```
-
-## 📈 Résultats
-
-### Performance comparative sur ImageNet
-
-| Méthode | Fidélité (↑) | Localisation (↑) | AUC Deletion (↑) | AUC Insertion (↑) | Temps (ms) (↓) |
-|---------|-------------|------------------|------------------|-------------------|----------------|
-| **Grad-ECLIP** | **0.856** | **0.782** | **0.734** | **0.689** | **15.2** |
-| CLIP Surgery | 0.823 | 0.754 | 0.701 | 0.652 | 22.3 |
-| GAME-MM | 0.798 | 0.721 | 0.678 | 0.634 | 18.7 |
-| M2IB | 0.814 | 0.743 | 0.695 | 0.648 | 35.1 |
-| BLIP | 0.789 | 0.712 | 0.665 | 0.621 | 28.9 |
-
-*↑ = plus élevé est meilleur, ↓ = plus faible est meilleur*
-
-### Analyses détaillées
-
-#### Distribution des performances par classe
-```python
-# Top 5 classes où Grad-ECLIP excelle
-excellent_classes = [
-    'whippet': 0.89,
-    'great white shark': 0.87, 
-    'sports car': 0.86,
-    'golden retriever': 0.85,
-    'tabby cat': 0.84
-]
-
-# Classes plus difficiles
-challenging_classes = [
-    'mushroom': 0.72,
-    'coral fungus': 0.69,
-    'brain coral': 0.67
-]
-```
-
-#### Temps de calcul
-- **Grad-ECLIP** : ~15ms par image (GPU)
-- **Échelonnage** : Linéaire avec la résolution d'image
-- **Mémoire** : ~2GB VRAM pour ViT-B/32
-
-### Visualisations de résultats
-
-#### concept_decomposition.png
-Montre comment Grad-ECLIP décompose une image complexe en concepts visuels :
-- **Objets principaux** : Identification précise
-- **Arrière-plan** : Attribution correcte d'importance faible
-- **Détails fins** : Capture des éléments texturaux pertinents
-
-#### map_comparaison.png
-Comparaison visuelle côte-à-côte des 5 méthodes :
-- **Netteté** : Grad-ECLIP produit des cartes plus nettes
-- **Localisation** : Meilleure précision sur les objets d'intérêt
-- **Cohérence** : Moins de bruit de fond
-
-#### textual_explanation.png
-Explications de la modalité textuelle :
-- **Mots-clés** : Identification des termes les plus importants
-- **Contexte** : Prise en compte des relations syntaxiques
-- **Granularité** : Attribution au niveau du token
-
-### Études d'ablation
-
-#### Impact des hyperparamètres
-```python
-# Test de sensibilité sur l'alpha (transparence)
-alpha_values = [0.2, 0.4, 0.6, 0.8]
-performance = [0.81, 0.856, 0.84, 0.79]  # Optimum à 0.4
-
-# Test des couches d'attention
-layer_performance = {
-    'layer_6': 0.82,
-    'layer_9': 0.85,
-    'layer_12': 0.856,  # Meilleure performance
-}
-```
-
-#### Robustesse aux perturbations
-- **Bruit gaussien** : Performance stable jusqu'à σ=0.1
-- **Rotations** : Maintien de 95% de performance jusqu'à 15°
-- **Changements d'échelle** : Robuste de 0.8x à 1.2x
 
 ## 📊 Documentation et rapport
 
 ### Documents principaux
 
 #### rapport_projet_bgdia708_grad_clip.pdf
-**Rapport complet du projet** (50+ pages) incluant :
+**Rapport complet du projet** (8 pages) incluant :
 
 1. **Introduction et motivation**
    - Contexte des modèles vision-langage
@@ -775,11 +464,6 @@ layer_performance = {
    - Améliorations possibles
    - Applications futures
 
-#### finetuning.md
-**Guide de fine-tuning** pour adapter les modèles :
-- Procédure de fine-tuning sur données spécifiques
-- Hyperparamètres recommandés
-- Scripts d'entraînement
 
 #### 2502.18816v1.pdf
 **Article scientifique de référence** :
@@ -818,104 +502,11 @@ Expérimentations sur l'adaptation des Vision Transformers :
 - Optimisations computationnelles
 
 #### `finetuning.ipynb`
-Fine-tuning des modèles pour des domaines spécifiques :
-- Adaptation sur données médicales
-- Optimisation pour la segmentation
-- Transfer learning strategies
 
-### Checkpoints et sauvegarde
 
-Le dossier `pynvml_checkpoints/` contient :
-- Points de contrôle d'entraînement
-- Modèles fine-tunés
-- Configurations optimales
 
-### Extensions possibles
 
-1. **Support d'autres architectures** :
-   - BLIP-2, ALBEF, X-VLM
-   - Adaptation aux modèles génératifs
 
-2. **Modalités supplémentaires** :
-   - Audio-visual explanation
-   - Video-text understanding
-
-3. **Applications spécialisées** :
-   - Diagnostic médical
-   - Véhicules autonomes
-   - Recherche scientifique
-
-## 🤝 Contribution
-
-### Comment contribuer
-
-1. **Fork le repository**
-```bash
-git fork https://github.com/username/Projet-IA-Fairness
-```
-
-2. **Créer une branche feature**
-```bash
-git checkout -b feature/amazing-feature
-```
-
-3. **Développer et tester**
-```bash
-# Ajouter vos modifications
-git add .
-git commit -m 'Add amazing feature'
-
-# Tester localement
-python -m pytest tests/
-jupyter notebook test.ipynb
-```
-
-4. **Pousser et créer une PR**
-```bash
-git push origin feature/amazing-feature
-# Ouvrir une Pull Request sur GitHub
-```
-
-### Guidelines de contribution
-
-- **Code style** : Suivre PEP 8
-- **Documentation** : Commenter le code et mettre à jour le README
-- **Tests** : Ajouter des tests pour les nouvelles fonctionnalités
-- **Performance** : Vérifier l'impact sur les temps de calcul
-
-### Roadmap
-
-#### Version 1.1 (prochaine)
-- [ ] Support de CLIP ViT-L/14
-- [ ] Interface web interactive
-- [ ] API REST pour déploiement
-
-#### Version 1.2
-- [ ] Explications vidéo
-- [ ] Support multi-langues
-- [ ] Optimisations ONNX
-
-#### Version 2.0
-- [ ] Architecture transformer personnalisée
-- [ ] Explications causales
-- [ ] Integration avec LLMs
-
-## 📞 Contact et support
-
-### Équipe de développement
-- **Développeur principal** : pmbathe-24
-- **Institution** : INFRES
-- **Encadrement académique** : [À compléter]
-
-### Support technique
-- **Issues GitHub** : Pour les bugs et demandes de fonctionnalités
-- **Discussions** : Pour les questions générales
-- **Email** : [À compléter]
-
-### Ressources additionnelles
-- **Documentation technique** : Dans le dossier `docs/`
-- **Tutoriels vidéo** : [Liens à ajouter]
-- **Papier ICLR** : [Soumission en cours]
 
 ## 📚 Références
 
@@ -958,16 +549,5 @@ git push origin feature/amazing-feature
 
 ---
 
-## ⚖️ Licence
-
-Ce projet est développé dans un cadre académique pour reproduire et comprendre les méthodes d'explicabilité pour les modèles vision-langage.
-
-**Licence MIT** - Voir le fichier `LICENSE` pour plus de détails.
-
----
 
 **🎯 Objectif** : Ce README fournit une documentation complète pour comprendre, utiliser et étendre le projet Grad-ECLIP. Pour toute question spécifique, consultez les notebooks ou ouvrez une issue GitHub.
-
-**📊 Status du projet** : ✅ Implémentation complète | 🧪 En cours d'évaluation | 📝 Documentation finalisée
-
-Similar code found with 1 license type
