@@ -12,7 +12,6 @@ Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niv
 * Garra Nohalia
 
 
-
 ##  Table des matières
 
 - Vue d'ensemble
@@ -22,8 +21,6 @@ Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niv
 - Notebooks principaux
 - Méthodes d'explication comparées
 - Évaluation sur ImageNet
-- Utilisation
-- Résultats
 - Documentation et rapport
 - Contribution
 - Références
