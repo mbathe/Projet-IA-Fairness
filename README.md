@@ -2,7 +2,18 @@
 
 Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'article scientifique 2502.18816v1.pdf, qui propose une approche novatrice pour expliquer les décisions du modèle CLIP (Contrastive Language-Image Pre-Training) en utilisant les gradients des couches d'attention.
 
-## 📋 Table des matières
+## Liste des auteurs par ordre de contribution au projet
+Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niveau d'implication dans le projet :
+
+* Mbathe Mekontchou Paul (Contributeur principal)
+* Ouhiba Aymen
+* Wande Wula Alfred
+* Vu Julien
+* Garra Nohalia
+
+
+
+##  Table des matières
 
 - Vue d'ensemble
 - Structure du projet
@@ -17,7 +28,7 @@ Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'ar
 - Contribution
 - Références
 
-## 🎯 Vue d'ensemble
+##  Vue d'ensemble
 
 ### Qu'est-ce que Grad-ECLIP ?
 
@@ -30,53 +41,51 @@ Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'ar
 
 ### Avantages de Grad-ECLIP
 
-- ✅ **Simplicité** : Méthode directe basée sur les gradients
-- ✅ **Efficacité** : Pas de réentraînement nécessaire
-- ✅ **Polyvalence** : Applicable aux branches image ET texte
-- ✅ **Performance** : Surpasse les méthodes existantes sur les benchmarks
-- ✅ **Interprétabilité** : Visualisations claires et intuitives
+-  **Simplicité** : Méthode directe basée sur les gradients
+-  **Efficacité** : Pas de réentraînement nécessaire
+-  **Polyvalence** : Applicable aux branches image ET texte
+-  **Performance** : Surpasse les méthodes existantes sur les benchmarks
+-  **Interprétabilité** : Visualisations claires et intuitives
 
-## 📁 Structure du projet
+##  Structure du projet
 
 ```
-├── 2502.18816v1.pdf                    # 📄 Article scientifique de référence
-├── rapport_projet_bgdia708_grad_clip.pdf  # 📊 Rapport complet du projet
-├── README.md                           # 📖 Ce fichier
-├── requirements.txt                    # 📦 Dépendances Python
-├── download_dataset.ipynb              # 📥 Téléchargement des datasets
-├── valprep.sh                         # 🔧 Script d'organisation ImageNet
-├── finetuning.md                      # 📝 Documentation fine-tuning
-├── imagenet_class_index.json          # 🏷️ Index des classes ImageNet
-├── imagenet_labels.txt                # 🏷️ Labels ImageNet
-├── concept_decomposition.png           # 🖼️ Visualisation des concepts
-├── map_comparaison.png                # 🖼️ Comparaison des méthodes
-├── textual_explanation.png            # 🖼️ Explications textuelles
-├── whippet.png                        # 🖼️ Image d'exemple
+├── 2502.18816v1.pdf                    #  Article scientifique de référence
+├── rapport_projet_bgdia708_grad_clip.pdf  #  Rapport complet du projet
+├── README.md                           #  Ce fichier
+├── requirements.txt                    #  Dépendances Python
+├── download_dataset.ipynb              # Notebook pour le téléchargement des datasets
+├── valprep.sh                         #  Script d'organisation ImageNet
+├── finetuning.md                      #  Documentation fine-tuning
+├── imagenet_class_index.json          #  Index des classes ImageNet
+├── imagenet_labels.txt                #  Labels ImageNet
+├── textual_explanation.png            #  Explications textuelles
+├── whippet.png                        #  Image d'exemple
 │
-├── CLIP/                              # 🎯 Implementation CLIP originale
+├── CLIP/                              # Implementation CLIP originale
 │   ├── clip/                          # Module CLIP core
 │   ├── notebooks/                     # Notebooks d'exemple CLIP
 │   └── requirements.txt               # Dépendances CLIP
 │
-├── Grad_CLIP/                         # 🚀 Notre implementation principale
-│   ├── 📓 Notebooks d'explication
+├── Grad_ECLIP/                         # 🚀 Notre implementation principale
+│   ├──  Notebooks d'explication
 │   │   ├── grad_eclip_image.ipynb     # Explication image→texte
 │   │   ├── grad_eclip_text.ipynb      # Explication texte→image
 │   │   └── compare_visualize.ipynb     # Comparaison des méthodes
 │   │
-│   ├── 📊 Notebooks d'évaluation
+│   ├──  Notebooks d'évaluation
 │   │   ├── imagenet_eval_deletion.ipynb    # Test de suppression
 │   │   ├── imagenet_eval_insertion.ipynb   # Test d'insertion
 │   │   └── finetuning.ipynb               # Fine-tuning des modèles
 │   │
-│   ├── 🔧 Scripts utilitaires
+│   ├──  Scripts utilitaires
 │   │   ├── clip_utils.py               # Utilitaires CLIP
 │   │   ├── generate_emap.py            # Génération des cartes d'explication
 │   │   ├── imagenet_metadata.py        # Métadonnées ImageNet
 │   │   ├── insertion_evaluation_results.csv # Résultats évaluation
 │   │   └── test.py                     # Scripts de test
 │   │
-│   ├── 🎯 Méthodes comparées
+│   ├──  Méthodes comparées
 │   │   ├── BLIP/                       # BLIP implementation
 │   │   │   ├── blip_vit.py
 │   │   │   ├── med.py
@@ -91,16 +100,16 @@ Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'ar
 │   │       ├── model.py
 │   │       └── utils.py
 │   │
-│   ├── 📂 Données et résultats
+│   ├──  Données et résultats
 │   │   ├── data/val/                   # Dataset de validation ImageNet
 │   │   ├── images/                     # Images d'exemple
 │   │   └── outfile/                    # Résultats de sortie
 │   │
-│   └── 🧪 Notebooks de développement
+│   └──  Notebooks de développement
 │       ├── pynvml_checkpoints/         # Points de contrôle
 │       └── adaptation_vit.ipynb        # Adaptation Vision Transformer
 │
-└── outfile/                           # 📁 Résultats globaux du projet
+└── outfile/                           #  Résultats globaux du projet
 ```
 
 ## 🛠 Installation
@@ -118,7 +127,7 @@ Ce projet reproduit et implémente la méthode **Grad-ECLIP** décrite dans l'ar
 
 ```bash
 # Cloner le repository
-git clone <repository-url>
+git clone https://github.com/mbathe/Projet-IA-Fairness.git
 cd Projet-IA-Fairness
 
 # Créer un environnement virtuel (recommandé)
