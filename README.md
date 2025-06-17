@@ -53,7 +53,6 @@ Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niv
 ├── requirements.txt                    #  Dépendances Python
 ├── download_dataset.ipynb              # Notebook pour le téléchargement des datasets
 ├── valprep.sh                         #  Script d'organisation ImageNet
-├── finetuning.md                      #  Documentation fine-tuning
 ├── imagenet_class_index.json          #  Index des classes ImageNet
 ├── imagenet_labels.txt                #  Labels ImageNet
 ├── textual_explanation.png            #  Explications textuelles
@@ -73,7 +72,7 @@ Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niv
 │   ├──  Notebooks d'évaluation
 │   │   ├── imagenet_eval_deletion.ipynb    # Test de suppression
 │   │   ├── imagenet_eval_insertion.ipynb   # Test d'insertion
-│   │   └── finetuning.ipynb               # Fine-tuning des modèles
+│   │   └── grad_eclip_finetuning.ipynb               # Fine-tuning des modèles
 │   │
 │   ├──  Scripts utilitaires
 │   │   ├── clip_utils.py               # Utilitaires CLIP
