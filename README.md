@@ -164,61 +164,8 @@ python -c "import torch; import clip; print('Installation réussie!')"
 
 ### Dataset principal : ImageNet
 
-Le projet utilise **ImageNet ILSVRC2012** pour l'évaluation quantitative. Utilisez le notebook download_dataset.ipynb pour télécharger automatiquement les données :
+Le projet utilise **ImageNet ILSVRC2012** pour l'évaluation quantitative et le dataset **MS COCO** pour l'évaluation de l'approche de finetuning. Utilisez le notebook download_dataset.ipynb pour télécharger automatiquement les données :
 
-```bash
-# Lancer le notebook de téléchargement
-jupyter notebook download_dataset.ipynb
-```
-
-### Options de téléchargement disponibles
-
-#### 1.  **Kaggle** (Recommandé)
-```python
-# Configuration requise
-kaggle_username = "votre_username"
-kaggle_key = "votre_api_key"
-
-# Téléchargement automatique via API Kaggle
-# Le notebook gère automatiquement l'extraction et l'organisation
-```
-
-#### 2.  **Site officiel ImageNet**
-```python
-# Nécessite inscription sur image-net.org
-# Téléchargement manuel puis traitement automatique
-```
-
-#### 3.  **Academic Torrents**
-```python
-# Plus fiable pour de gros volumes
-# Téléchargement via protocole torrent
-```
-
-#### 4.  **Échantillon de test**
-```python
-# Dataset réduit pour développement et tests rapides
-# ~100 images par classe sur 10 classes
-```
-
-### Organisation automatique des données
-
-Une fois téléchargé, utilisez le script valprep.sh pour organiser le validation set :
-
-```bash
-# Rendre le script exécutable
-chmod +x valprep.sh
-
-# Organiser les données de validation ImageNet
-bash valprep.sh
-
-# Structure finale attendue :
-# Grad_CLIP/data/val/
-# ├── n01440764/  # tench
-# ├── n01443537/  # goldfish  
-# ├── n01484850/  # great white shark
-# └── ... (1000 classes au total)
-```
 
 ### Datasets supplémentaires
 
@@ -241,20 +188,7 @@ Ce notebook implémente l'algorithme principal de Grad-ECLIP pour expliquer pour
 - Comparaison avec les méthodes baseline
 - Export des résultats en haute résolution
 
-**Exemple d'utilisation :**
-```python
-# Charger une image et un texte
-image = load_image("whippet.png")
-text = "a photo of a whippet dog"
 
-# Générer l'explication Grad-ECLIP
-explanation_map = grad_eclip_explain_image(model, image, text)
-
-# Visualiser avec différents modes
-visualize_explanation(image, explanation_map, mode='heatmap')
-visualize_explanation(image, explanation_map, mode='overlay')
-visualize_explanation(image, explanation_map, mode='masked')
-```
 
 **Sorties générées :**
 - Cartes de saillance colorées
@@ -263,7 +197,7 @@ visualize_explanation(image, explanation_map, mode='masked')
 - Comparaisons côte-à-côte avec autres méthodes
 
 ### 2. `grad_eclip_text.ipynb`
-**📝 Explication du texte par l'image**
+**Explication du texte par l'image**
 
 Ce notebook implémente l'explication inverse : quels mots du texte sont importants pour la correspondance avec l'image.
 
@@ -467,25 +401,6 @@ Ce test mesure l'**amélioration de performance** quand on révèle progressivem
 - Algorithmic details
 - Experimental validation
 
-### Métadonnées du projet
-
-```python
-# Configuration du projet
-PROJECT_INFO = {
-    'name': 'Grad-ECLIP',
-    'version': '1.0.0',
-    'authors': ['pmbathe-24'],
-    'institution': 'INFRES',
-    'year': 2024,
-    'license': 'MIT',
-    'dependencies': {
-        'torch': '>=1.12.0',
-        'clip': '>=1.0',
-        'transformers': '>=4.20.0',
-        'opencv-python': '>=4.5.0'
-    }
-}
-```
 
 ## 🔬 Recherche et développement
 
@@ -546,4 +461,4 @@ Expérimentations sur l'adaptation des Vision Transformers :
 ---
 
 
-**🎯 Objectif** : Ce README fournit une documentation complète pour comprendre, utiliser et étendre le projet Grad-ECLIP. Pour toute question spécifique, consultez les notebooks ou ouvrez une issue GitHub.
+**🎯 Objectif** : Ce README fournit une documentation complète pour comprendre, utiliser et étendre le projet Grad-ECLIP. Pour toute question spécifique, consultez les notebooks
