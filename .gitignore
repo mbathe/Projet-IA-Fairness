@@ -173,5 +173,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 Grad_ECLIP/data
+Grad_ECLIP/checkpoints
 test
 outfile
