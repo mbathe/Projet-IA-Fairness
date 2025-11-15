@@ -108,7 +108,7 @@ Les contributeurs sont présentés ci-dessous par ordre décroissant de leur niv
 └── outfile/                           #  Résultats globaux du projet
 ```
 
-## 🛠 Installation
+## Installation
 
 ### Prérequis
 
@@ -174,7 +174,7 @@ Le projet supporte également :
 - **ImageNet-V2** : Version améliorée d'ImageNet
 - **Conceptual Captions** : Paires image-texte
 
-## 📓 Notebooks principaux
+## Notebooks principaux
 
 ### 1. `grad_eclip_image.ipynb` 
 ** Explication des images par le texte**
@@ -270,7 +270,7 @@ Ce notebook compare Grad-ECLIP avec les autres méthodes d'explicabilité dispon
       return explanation
   ```
 
-### BLIP 🔵
+### BLIP 
 **Localisation :** BLIP
 
 - **Principe** : Bootstrap vision-language understanding avec captioning
@@ -348,7 +348,7 @@ Ce test mesure la **baisse de performance** quand on supprime progressivement le
 
 
 #### 2. `imagenet_eval_insertion.ipynb`
-**➕ Test d'insertion (Insertion Test)**
+** Test d'insertion (Insertion Test)**
 
 Ce test mesure l'**amélioration de performance** quand on révèle progressivement les régions importantes sur une image initialement masquée.
 
@@ -459,6 +459,7 @@ Expérimentations sur l'adaptation des Vision Transformers :
 - **Conceptual Captions** : https://ai.google.com/research/ConceptualCaptions/
 
 ---
+
 
 
 **🎯 Objectif** : Ce README fournit une documentation complète pour comprendre, utiliser et étendre le projet Grad-ECLIP. Pour toute question spécifique, consultez les notebooks
